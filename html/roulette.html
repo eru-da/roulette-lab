@@ -3,6 +3,14 @@
     <head>
         <title>Roulette! Spin to Win</title>
         <meta charset=utf8>
+        <style>
+            table.spinholder {
+                border-style: solid;
+            }
+            table.spinholder td {
+                text-align: center;
+            }
+        </style>
     <head>
     <body>
         <div>
@@ -11,14 +19,13 @@
             </button>
         </div>
         <div>
-            <table>
+            <table class="spinholder" id="pastspins">
                 <thead>
-                    <td>Number</td>
-                    <td>Color</td>
-                    <td>Pairity</td>
-                    <td>Pass/Fail</td>
+                    <th>Number</th>
+                    <th>Color</th>
+                    <th>Pairity</th>
+                    <th>Pass/Fail</th>
                 </thead>
-                <tbody id="pastspins"></tbody>
             </table>
         </div>
     </body>

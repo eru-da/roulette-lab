@@ -34,9 +34,11 @@ function spin() {
     }
 
     let table = document.getElementById("pastspins");
-    for (item in result) {
+    let body = document.createElement("tbody");
+    for (let i = 0; i < 4; i++) {
         let elem = document.createElement("td")
-        elem.textContent = item;
-        table.appendChild(item);
+        elem.textContent = result[i];
+        body.appendChild(elem);
     }
+    table.appendChild(body);
 }
