@@ -1,3 +1,7 @@
+"use strict";
+
+let sock;
+
 function spin() {
     let wheel = [0,34,10,21,28,4,18,9,27,22,12,3,17,20,11,33,2,10,32,"00",15,8,25,1,31,20,14,30,7,24,29,35,6,13,23,19,5,36];
     let rand_index = Math.floor(Math.random() * 37);
@@ -33,12 +37,31 @@ function spin() {
         result.push("Manque");
     }
 
+    console.log(result);
+    sock.send(result.join("/"));
+}
+
+function gotSpin(event)
+{
+    let data = event.data.split("/");
+    console.log(data);
     let table = document.getElementById("pastspins");
     let body = document.createElement("tbody");
     for (let i = 0; i < 4; i++) {
         let elem = document.createElement("td")
-        elem.textContent = result[i];
+        elem.textContent = data[i];
         body.appendChild(elem);
     }
     table.appendChild(body);
 }
+
+function main()
+{
+    sock = new WebSocket("ws://" + document.location.host + "/sock");
+    sock.addEventListener("open", ()=>{
+        console.log("Sock open");
+        document.getElementById("spinner").disabled = 0;
+    })
+    sock.addEventListener("message", gotSpin);
+}
+main();
